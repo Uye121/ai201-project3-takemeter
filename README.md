@@ -247,6 +247,8 @@ Groq Zero-Shot performed 10% better than the Fine-Tuned DistilBERT. This makes s
 
 **Post:** Maybe this is a crazy question, but genuinely this trait feels so underwhelming. I've got shepherd 7 in both normal games and the anniversary mode (with 2 coven, no less, giving my Bia and Bayin 110 AP and infinite mana) and both times I didn't get close to winning. I had good backline carries but ofc there are ways to ignore frontline so they just got melted and Bia & Bayin couldn't carry at that point. Not sure what I'm doing wrong, honestly.
 
+**Confidence:** 0.31
+
 **Predicted:** question
 
 **Actual:** question
@@ -259,17 +261,21 @@ Groq Zero-Shot performed 10% better than the Fine-Tuned DistilBERT. This makes s
 
 **Post:** Its so hard for new players to know who to put a link Bane on, or get four artifacts they don't know and have to choose one not good for their comp.
 
+**Confidence:** 0.28
+
 **Predicted:** question
 
 **Actual:** user_feedback
 
-**Why it failed:** The poster is clearly posting a suggestion of what they think would be good for the game, especially for those who are new to the game. Maybe the model sees the word what and assumes it's a question.
+**Why it failed:** The model is not sure what type of post this is, so it biased towards question as it is trained heavily on questions. It failed to capture the poster's intention of offering a game feedback.
 
 ### Example 3:
 
 **Title:** Design Intention: Space Gods
 
 **Post:** I personally believe the designers had in mind that the space gods were suppose to be encounters and retaining similar augment choices but now considered \"gifts\" on each stage. Instead of having two space gods per game, there is only one per game, with three choices from their pool of gifts. Everyone gets the same boon at the end as well. I feel if it was more streamlined that way, there would not be certain biases towards certain gods and certain unbalancing issues since everyone gets the same boon in the end and not dealing with the two third choices shenanigans at the end. What do you think?
+
+**Confidence:** 0.28
 
 **Predicted:** question
 
@@ -282,6 +288,8 @@ Groq Zero-Shot performed 10% better than the Fine-Tuned DistilBERT. This makes s
 **Title:** What's with people calling rerolling metaslaves?
 
 **Post:** This is something that's really been bothering me since the beginning of this set. With this meta usually being about rerolling, people keep saying that the strategy is uncreative metaslave compared to Fast 9, but isn't the point of any competitive game that different playstyles become meta over time? I mean, it's not that Fast 9 has become weak (after all, 5-cost pieces should always be strong because otherwise they wouldn't be legendary, right?), the only thing that changed is the way to play it and build the composition. And let's face it, Fast 9 in the previous set wasn't difficult at all since it didn't depend solely on playing aggressively with a lot of health like it does now (it's no coincidence that pivoting from Yordle to Annie was playable).
+
+**Confidence:** 0.29
 
 **Predicted:** question
 
