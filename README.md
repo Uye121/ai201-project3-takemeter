@@ -201,10 +201,38 @@ Post: {post_text}
 
 | Model | Accuracy |
 |--------|---------|
-| Groq Zero-Shot | 58.3% |
+| Groq Zero-Shot | 66.7% |
 | Fine-Tuned DistilBERT | 56.7% |
 
-Groq Zero-Shot performed slightly better than the Fine-Tuned DistilBERT. This makes sense given the small dataset with class imbalance. Groq benefitted from having billions of parameters and can reason better.
+Groq Zero-Shot performed 10% better than the Fine-Tuned DistilBERT. This makes sense given the small dataset with class imbalance. Groq benefitted from having billions of parameters and can reason better.
+
+### Per-Class Metrics
+
+#### Groq Zero-Shot
+
+| | precision | recal | f1-score | support |
+|--------|---------|--------|---------|--------|
+| Discussion | 0.29 | 1.00 | 0.44 | 2 |
+| Question | 0.85 | 0.65 | 0.73 | 17 |
+| User Feedback | 0.67 | 0.50 | 0.57 | 8 |
+| General Chat | 0.75 | 1.00 | 0.86 | 3 |
+| | | | | |
+| **Accuracy** | | | **0.67** | **30** |
+| **Macro Avg** | **0.64** | **0.79** | **0.65** | **30** |
+| **Weighted Avg** | **0.75** | **0.67** | **0.68** | **30** |
+
+#### Fine-Tuned DistilBERT
+
+| | precision | recal | f1-score | support |
+|--------|---------|--------|---------|--------|
+| Discussion | 0.00 | 0.00 | 0.00 | 2 |
+| Question | 0.57 | 1.00 | 0.72 | 17 |
+| User Feedback | 0.00 | 0.00 | 0.00 | 8 |
+| General Chat | 0.00 | 0.00 | 0.00 | 3 |
+| | | | | |
+| **Accuracy** | | | **0.57** | **30** |
+| **Macro Avg** | **0.14** | **0.25** | **0.18** | **30** |
+| **Weighted Avg** | **0.32** | **0.57** | **0.41** | **30** |
 
 ### Confusion Matrix
 ![Confusion Matrix](./confusion_matrix.png)
@@ -213,7 +241,7 @@ Groq Zero-Shot performed slightly better than the Fine-Tuned DistilBERT. This ma
 
 ## Sample Classification
 
-#### Example 1:
+### Example 1:
 
 **Title:** How do yall win with Shepherd 7???
 **Post:** Maybe this is a crazy question, but genuinely this trait feels so underwhelming. I've got shepherd 7 in both normal games and the anniversary mode (with 2 coven, no less, giving my Bia and Bayin 110 AP and infinite mana) and both times I didn't get close to winning. I had good backline carries but ofc there are ways to ignore frontline so they just got melted and Bia & Bayin couldn't carry at that point. Not sure what I'm doing wrong, honestly.
@@ -221,7 +249,7 @@ Groq Zero-Shot performed slightly better than the Fine-Tuned DistilBERT. This ma
 **Actual:** question
 **Why it succeeded:** The model correctly predicted "question" for this post because the text contains strong signal that aligns with the question category. The title explicitly asks a question with multiple question marks. Despite the content containing feedbacks and emotional language, its primary intent is to ask others to help with playing this particular team composition. The explicit help-seeking language ("How do yall win," "Not sure what I'm doing wrong") provided unambiguous signals that outweighed the complaint elements, allowing the model to make the correct classification despite the post being a classic edge case.
 
-#### Example 2:
+### Example 2:
 
 **Title:** I think artifacts should list good users of the items, such as recommended items and even psionic letting you what items are okay for the champ.
 **Post:** Its so hard for new players to know who to put a link Bane on, or get four artifacts they don't know and have to choose one not good for their comp.
@@ -229,7 +257,7 @@ Groq Zero-Shot performed slightly better than the Fine-Tuned DistilBERT. This ma
 **Actual:** user_feedback
 **Why it failed:** The poster is clearly posting a suggestion of what they think would be good for the game, especially for those who are new to the game. Maybe the model sees the word what and assumes it's a question.
 
-#### Example 3:
+### Example 3:
 
 **Title:** Design Intention: Space Gods
 **Post:** I personally believe the designers had in mind that the space gods were suppose to be encounters and retaining similar augment choices but now considered \"gifts\" on each stage. Instead of having two space gods per game, there is only one per game, with three choices from their pool of gifts. Everyone gets the same boon at the end as well. I feel if it was more streamlined that way, there would not be certain biases towards certain gods and certain unbalancing issues since everyone gets the same boon in the end and not dealing with the two third choices shenanigans at the end. What do you think?
@@ -237,7 +265,7 @@ Groq Zero-Shot performed slightly better than the Fine-Tuned DistilBERT. This ma
 **Actual:** discussion
 **Why it failed:** The model predicted "question" for this post because it fixated on the closing phrase "What do you think?" while ignoring the preceding text, which presents a structured argument with a clear claim, supporting evidence, and analysis. The model made a surface-level assumption and failed to distinguish the post's intention of inviting a discussion.
 
-#### Example 4:
+### Example 4:
 
 **Title:** What's with people calling rerolling metaslaves?
 **Post:** This is something that's really been bothering me since the beginning of this set. With this meta usually being about rerolling, people keep saying that the strategy is uncreative metaslave compared to Fast 9, but isn't the point of any competitive game that different playstyles become meta over time? I mean, it's not that Fast 9 has become weak (after all, 5-cost pieces should always be strong because otherwise they wouldn't be legendary, right?), the only thing that changed is the way to play it and build the composition. And let's face it, Fast 9 in the previous set wasn't difficult at all since it didn't depend solely on playing aggressively with a lot of health like it does now (it's no coincidence that pivoting from Yordle to Annie was playable).
